@@ -5,8 +5,7 @@ public enum BannersEnum {
     INICIO {
         @Override
         public String format(Object nome) {
-            return String.format(
-        """
+        return """
         +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         +             #####    ######   ##   ##        ##  ##    ####    ##  ##   ####      ####  +  
         + ╲╲┏━━┓╲╲    ##  ##   ##       ### ###        ##  ##     ##     ### ##   ## ##    ##  ## +
@@ -17,11 +16,11 @@ public enum BannersEnum {
         + ▔▔▔┗┗▔▔▔    #####    ######   ##   ##          ##      ####    ##  ##   ####      ####  +  
         +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         +
-        + Olá %s! Pressione Enter para continuar!
+        + Pressione Enter para continuar!
         +
         +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         
-        """,(String) nome);
+        """;
 
         }
     },
@@ -49,14 +48,16 @@ public enum BannersEnum {
             """
             +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             +
-            ==>  Nome completo: %s %s
+            + ==>  Nome completo: %s %s
             +
-            ==>  Data de nacimento: %s
+            + ==>  Data de nacimento: %s
             +
-            ==>  Data ultima avaliação: %s
+            + ==>  Data ultima avaliação: %s
             +
             %s
-            =====> Parecer com relação a COVID-19: %s
+            + =====> Parecer com relação a COVID-19: %s
+            +
+            + Pressione enter para prosseguir!
             +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
             """    
             , 

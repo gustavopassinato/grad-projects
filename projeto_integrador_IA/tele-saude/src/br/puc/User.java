@@ -1,6 +1,9 @@
 package br.puc;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 public class User extends Object{
@@ -10,12 +13,16 @@ public class User extends Object{
     private String dataNascimento;
     private LocalDate dataAvaliacao;
     private Map<SintomaEnum, Integer> sintomas;
+    private String result;
+
+    private Integer[] intensidadeDeSintomasParaCovid= {10,9,8,6,4,5,9};
 
     public User(String nome, String sobrenome, String dataNascimento) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.dataNascimento = dataNascimento;
         this.dataAvaliacao = LocalDate.now();
+        this.sintomas = new HashMap<>();
     }
 
     public String getNome() {
@@ -42,29 +49,35 @@ public class User extends Object{
         this.sintomas.put(sintoma, intensidade);
     }
 
-    public Object getSintomasFormat() {
+    public String getSintomasFormat() {
        
-        String result = "==> Resumo dos sintomas\n";
-        this.sintomas.forEach((sintoma, intensidade)->extracted(result, sintoma, intensidade));
+        this.result = "+ ==> Resumo dos sintomas\n\n";
+        this.sintomas.forEach((sintoma, intensidade)-> this.result += String.format("+   %s -> %s%n+%n", sintoma.sintomaFormatado(), intensidadeSintomaFormatada(intensidade)));
         
         return result;
     }
 
-    private void extracted(String result, SintomaEnum sintoma, Integer intensidade) {
-        result += String.format("+   %s -> %s\n+\n", sintoma.sintomaFormatado(), intensidadeSintomaFormatada(intensidade));
-    }
-
     private String intensidadeSintomaFormatada(Integer intensidade){
-        String result= "[";
+        String res= "[";
         for(int i = 1; i<= intensidade; i++){
-            result+="#";
+            res+="#";
         }
-        result+="]";
-        return result;
+        res+="]";
+        return res;
     }
 
-    public Object getParecer() {
-        return null;
+    public String getParecer() {
+        Collection<Integer> it = this.sintomas.values();
+        ArrayList<Integer> intensidades = new ArrayList<>(it);
+
+        boolean res = true;
+        for(int i = 0; i< intensidades.size();i++){
+            if (intensidades.get(i)< intensidadeDeSintomasParaCovid[i]){
+                res = false;
+            }
+        }
+
+        return res ? "Positivo" : "Negativo";
     }
 
 }

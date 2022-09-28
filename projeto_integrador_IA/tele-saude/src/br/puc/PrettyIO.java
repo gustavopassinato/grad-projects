@@ -17,8 +17,9 @@ public class PrettyIO {
         return scan.nextInt();
     }
 
-    public static void printUser(User user){
+    public static Integer printUser(User user, Scanner scan){
         Util.clearConsole();
         System.out.println(BannersEnum.USUARIO.format(user));
+        return scan.nextInt();
     }
 }

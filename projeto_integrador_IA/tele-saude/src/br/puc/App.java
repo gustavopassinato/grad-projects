@@ -5,17 +5,23 @@ import java.util.Scanner;
 public class App {
 
     private static Scanner scan = new Scanner(System.in);
+    private static User user;
 
     public static void main(String[] args) throws Exception {
-        System.out.println(BannersEnum.PERGUNTA.format("Qual o seu nome?"));
-        String userName = scan.nextLine();
-        Util.clearConsole();
-        System.out.println(BannersEnum.INICIO.format(userName));
+        System.out.println(BannersEnum.INICIO.format(null));
         scan.nextLine();
 
         while(true){
-            int escolha = Integer.parseInt(PrettyIO.print(BannersEnum.PERGUNTA, "Digite 1 para avaliação e 0 para sair", scan));
+            int escolha = -1;
+            try{
+                escolha = Integer.parseInt(PrettyIO.print(BannersEnum.PERGUNTA, "Digite 1 para avaliação, 2 para apresentar resultados ou 0 para sair", scan));
+
+            }catch(NumberFormatException exception){
+                PrettyIO.print(BannersEnum.PERGUNTA, "Valor digitado é inválido, pressione enter para voltar ao menu!", scan);
+            }
+            
             if(escolha == 1) avaliacao();
+            if(escolha == 2) apresentaResultados();
             if(escolha == 0) break;
             else{
                 System.out.println("Escolha inválida!");
@@ -25,7 +31,7 @@ public class App {
     }
 
     private static void avaliacao() {
-        User user = cadastroDeUsuario();
+        user = cadastroDeUsuario();
         user.adicionaSintoma(
             SintomaEnum.CORIZA, 
             PrettyIO.printAvaliacaoSintoma(SintomaEnum.CORIZA, scan)
@@ -68,5 +74,12 @@ public class App {
         String dataNascimento = PrettyIO.print(BannersEnum.PERGUNTA, "Qual a sua data de nascimento?", scan);
         
         return new User(nome, sobrenome, dataNascimento);
+    }
+
+    private static void apresentaResultados(){
+        if(user == null) PrettyIO.print(BannersEnum.PERGUNTA, "[ERRO] Nenhum usuário cadastrado ainda!", scan);
+        else{
+            PrettyIO.printUser(user, scan);
+        }
     }
 }
