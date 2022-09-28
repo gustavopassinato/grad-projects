@@ -7,11 +7,11 @@ public class User {
 
     private String nome;
     private String sobrenome;
-    private LocalDate dataNascimento;
+    private String dataNascimento;
     private LocalDate dataAvaliacao;
     private Map<SintomaEnum, Integer> sintomas;
 
-    public User(String nome, String sobrenome, LocalDate dataNascimento) {
+    public User(String nome, String sobrenome, String dataNascimento) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.dataNascimento = dataNascimento;
@@ -26,7 +26,7 @@ public class User {
         return sobrenome;
     }
 
-    public LocalDate getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
