@@ -1,5 +1,6 @@
 package br.puc;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class PrettyIO {
@@ -14,5 +15,10 @@ public class PrettyIO {
         System.out.println(BannersEnum.PERGUNTA.format("Em uma escala de 0 a 10, o qual a intensidade do seu sintoma de "+
             sintoma.sintomaFormatado()));
         return scan.nextInt();
+    }
+
+    public static void printUser(User user){
+        Util.clearConsole();
+        System.out.println(BannersEnum.USUARIO.format(user));
     }
 }

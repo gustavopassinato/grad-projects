@@ -14,8 +14,7 @@ public class App {
         scan.nextLine();
 
         while(true){
-            System.out.println(BannersEnum.PERGUNTA.format("Digite 1 para avaliação e 0 para sair"));
-            int escolha = scan.nextInt();
+            int escolha = Integer.parseInt(PrettyIO.print(BannersEnum.PERGUNTA, "Digite 1 para avaliação e 0 para sair", scan));
             if(escolha == 1) avaliacao();
             if(escolha == 0) break;
             else{

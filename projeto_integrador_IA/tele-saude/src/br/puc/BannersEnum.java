@@ -4,7 +4,7 @@ package br.puc;
 public enum BannersEnum {
     INICIO {
         @Override
-        public String format(String nome) {
+        public String format(Object nome) {
             return String.format(
         """
         +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -21,13 +21,13 @@ public enum BannersEnum {
         +
         +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         
-        """, nome);
+        """,(String) nome);
 
         }
     },
     PERGUNTA {
         @Override
-        public String format(String pergunta) {
+        public String format(Object pergunta) {
             return String.format(
             """
             +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -36,10 +36,40 @@ public enum BannersEnum {
             +
             +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
             """    
-            , pergunta);
+            , (String) pergunta);
             
+        }
+    },
+    USUARIO {
+        @Override
+        public String format(Object userOut) {
+            User user = (User) userOut;
+
+            return String.format(
+            """
+            +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            +
+            ==>  Nome completo: %s %s
+            +
+            ==>  Data de nacimento: %s
+            +
+            ==>  Data ultima avaliação: %s
+            +
+            %s
+            =====> Parecer com relação a COVID-19: %s
+            +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
+            """    
+            , 
+            user.getNome(), 
+            user.getSobrenome(), 
+            user.getDataNascimento(),
+            user.getDataAvaliacao(),
+            user.getSintomasFormat(),
+            user.getParecer()
+            );
         }
     };
 
-    public abstract String format(String text);
+
+    public abstract String format(Object text);
 }
