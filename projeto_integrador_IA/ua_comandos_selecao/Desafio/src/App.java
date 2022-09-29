@@ -35,6 +35,5 @@ public class App {
             saldo = saldo.subtract(saqueVal);
             System.out.println("Após o saque de " + saqueVal + " seu novo saldo é de " + saldo);
         }
-
     }
 }
