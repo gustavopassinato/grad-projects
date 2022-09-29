@@ -8,6 +8,20 @@ public class App {
     private static User user;
 
     public static void main(String[] args) throws Exception {
+        int val = 2;
+        switch (val) {
+            case 0:
+            case 1:
+            System.out.println("ooo00");
+                
+                break;
+            case 2:
+            System.out.println(9999);
+        
+            default:
+                break;
+        }
+
         System.out.println(BannersEnum.INICIO.format(null));
         scan.nextLine();
 
@@ -79,7 +93,7 @@ public class App {
     private static void apresentaResultados(){
         if(user == null) PrettyIO.print(BannersEnum.PERGUNTA, "[ERRO] Nenhum usuário cadastrado ainda!", scan);
         else{
-            PrettyIO.printUser(user, scan);
+            PrettyIO.printUser(user,scan);
         }
     }
 }
