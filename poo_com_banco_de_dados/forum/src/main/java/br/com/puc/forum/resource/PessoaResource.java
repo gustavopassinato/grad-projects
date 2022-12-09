@@ -1,6 +1,7 @@
 package br.com.puc.forum.resource;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +80,18 @@ public class PessoaResource {
 			
 			return ResponseEntity.ok().body(pessoa);
 		} catch (PessoaException ex) {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	@GetMapping("/all")
+	@ApiOperation(value = "Endpoint de busca por todas as pessoas já cadastradas", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Pessoa>> getAllPessoa(){
+		try {
+			List<Pessoa> allPessoa = pessoaService.getAllPessoa();
+			
+			return ResponseEntity.ok().body(allPessoa);
+		}catch(Exception ex) {
 			return ResponseEntity.notFound().build();
 		}
 	}
